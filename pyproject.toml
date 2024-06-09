@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "geo-proj"
+version = "0.1.0"
+description = ""
+authors = ["Daniel <dschne@umich.edu>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+duckdb = "^1.0.0"
+pandas = "^2.2.2"
+fire = "^0.6.0"
+pyarrow = "^16.1.0"
+loguru = "^0.7.2"
+pydantic = "^2.7.3"
+pytest = "^8.2.2"
+ruff = "^0.4.8"
+dask = "^2024.5.2"
+pystac-client = "^0.8.2"
+stackstac = "^0.5.0"
+geogif = "^0.2"
+planetary-computer = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
