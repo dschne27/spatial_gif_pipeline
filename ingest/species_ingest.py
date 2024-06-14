@@ -2,9 +2,11 @@
 from multiprocessing import Pool, set_start_method
 import pandas as pd
 from loguru import logger
+import fire
+
 from ingest.s3_utils import get_parquet_data
 
-def main():
+def main(dataset: str):
     '''Run the species ingestion process.'''
     logger.info("Loading all mammals data ...")
     results = []
@@ -17,15 +19,17 @@ def main():
     if mammals is not None:
         logger.info("Showing mammals.head():")
         print(mammals.head())
+    else:
+        logger.error("No data found for mammals.")
     if plants is not None:
         logger.info("Showing plants.head():")
         print(plants.head())
     else:
-        logger.error("No data found.")
+        logger.error("No data found for plants.")
     print("species ingestion exit")
     
 
 if __name__ == "__main__":
     set_start_method("spawn")
-    main()
+    fire.Fire(lambda **kwargs: main(**kwargs))
 

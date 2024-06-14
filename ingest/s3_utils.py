@@ -31,10 +31,10 @@ def get_parquet_data(dataset_name: str) -> pd.DataFrame:
         all_dataset_parquet_files = fs.glob(f"{dataset_base_dir}*.parquet")
         logger.info(f"Found {len(all_dataset_parquet_files)} parquet files in {dataset_base_dir}")
 
-        file_list = [f's3://{file}' for file in parquet_files]
+        file_list = [f's3://{file}' for file in all_dataset_parquet_files]
 
         start_time = time.time()
-        logger.info(f"Reading parquet data from {parquet_base_dir}")
+        logger.info(f"Reading parquet data from {dataset_base_dir}: {file_list} ...")
 
         dataset = pq.ParquetDataset(file_list, filesystem=fs)
         table = dataset.read()
@@ -44,6 +44,6 @@ def get_parquet_data(dataset_name: str) -> pd.DataFrame:
         logger.info(f"Read {len(dataframe)} records from dataset {dataset_name} in {end_time - start_time} seconds")
         return dataframe
     except Exception as e:
-        logger.error(f"Error reading parquet data: {e}")
+        logger.error(f"Error reading parquet data: {e.with_traceback}")
         return None
         
